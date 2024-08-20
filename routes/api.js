@@ -40,7 +40,7 @@ module.exports = function (app) {
             const title = req.body.title;
 
             if (!title) {
-                return res.status(400).send('missing required field title');
+                return res.send('missing required field title');
             }
 
             let newBook = new Book({ title });
@@ -73,7 +73,7 @@ module.exports = function (app) {
                     }
                     res.json(book);
                 }).catch((err) => {
-                    res.status(500).send('no book exists');
+                    res.send('no book exists');
                 });
         })
 
@@ -81,7 +81,7 @@ module.exports = function (app) {
             let bookId = ObjectId.createFromHexString(req.params.id);
             let comment = req.body.comment;
             if (!comment) {
-                return res.status(400).send('missing required field comment');
+                return res.send('missing required field comment');
             }
 
             Book.findById(bookId)
@@ -95,7 +95,7 @@ module.exports = function (app) {
                 .then((savedBook) => {
                     res.json(savedBook);
                 }).catch((err) => {
-                    res.status(500).send('no book exists');
+                    res.send('no book exists');
                 });
         })
 
@@ -109,7 +109,7 @@ module.exports = function (app) {
                     }
                     res.send('delete successful');
                 }).catch((err) => {
-                    res.status(500).send('no book exists');
+                    res.send('no book exists');
                 });
         });
 
